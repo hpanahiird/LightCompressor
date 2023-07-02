@@ -3,4 +3,11 @@
     <string name="home_title">Video Compressor Sample</string>
     <string name="pick_video">Pick Video</string>
     <string name="record_video">Record Video</string>
+    <string-array name="qualities">
+        <item>Very high</item>
+        <item>high</item>
+        <item>medium</item>
+        <item>low</item>
+        <item>very low</item>
+    </string-array>
 </resources>

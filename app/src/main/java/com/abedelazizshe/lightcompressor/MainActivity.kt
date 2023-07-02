@@ -12,9 +12,14 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.EditText
+import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.widget.doOnTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.abedelazizshe.lightcompressorlibrary.CompressionListener
@@ -32,6 +37,10 @@ import kotlinx.coroutines.launch
  * elaziz.shehadeh@gmail.com
  */
 class MainActivity : AppCompatActivity() {
+
+    private var quality:VideoQuality = VideoQuality.VERY_HIGH
+
+    private var bitrate = 2000
 
     companion object {
         const val REQUEST_SELECT_VIDEO = 0
@@ -65,6 +74,47 @@ class MainActivity : AppCompatActivity() {
         recyclerview.layoutManager = LinearLayoutManager(this)
         adapter = RecyclerViewAdapter(applicationContext, data)
         recyclerview.adapter = adapter
+
+//        val spinner: Spinner = findViewById(R.id.input)
+//// Create an ArrayAdapter using the string array and a default spinner layout
+//        ArrayAdapter.createFromResource(
+//            this,
+//            R.array.qualities,
+//            android.R.layout.simple_spinner_item
+//        ).also { adapter ->
+//            // Specify the layout to use when the list of choices appears
+//            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+//            // Apply the adapter to the spinner
+//            spinner.adapter = adapter
+//        }
+//
+//        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+//            override fun onItemSelected(
+//                parent: AdapterView<*>?,
+//                view: View?,
+//                position: Int,
+//                id: Long
+//            ) {
+//                quality = when (position) {
+//                    0 -> VideoQuality.VERY_HIGH
+//                    1 -> VideoQuality.HIGH
+//                    2 -> VideoQuality.MEDIUM
+//                    3 -> VideoQuality.LOW
+//                    4 -> VideoQuality.VERY_LOW
+//                    else -> VideoQuality.VERY_HIGH
+//                }
+//            }
+//
+//            override fun onNothingSelected(parent: AdapterView<*>?) {
+//            }
+//
+//        }
+
+        val editText: EditText = findViewById(R.id.input)
+        editText.doOnTextChanged { text, start, before, count ->
+            bitrate = text.toString().toInt()
+        }
+
     }
 
     //Pick a video file from device
@@ -183,8 +233,11 @@ class MainActivity : AppCompatActivity() {
 //                    videoName = "compressed_video",
 //                ),
                 configureWith = Configuration(
-                    quality = VideoQuality.LOW,
+//                    quality = quality,
                     isMinBitrateCheckEnabled = true,
+                    videoWidth = 1280.0,
+                    videoHeight = 720.0,
+                    videoBitrateInMbps = bitrate * 1000
                 ),
                 listener = object : CompressionListener {
                     override fun onProgress(index: Int, percent: Float) {
