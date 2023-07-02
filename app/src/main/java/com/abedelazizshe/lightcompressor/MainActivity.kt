@@ -12,10 +12,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.EditText
-import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -237,7 +234,7 @@ class MainActivity : AppCompatActivity() {
                     isMinBitrateCheckEnabled = true,
                     videoWidth = 1280.0,
                     videoHeight = 720.0,
-                    videoBitrateInMbps = bitrate * 1000
+                    videoBitrateInbps = bitrate * 1000
                 ),
                 listener = object : CompressionListener {
                     override fun onProgress(index: Int, percent: Float) {

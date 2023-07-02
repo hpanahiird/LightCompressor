@@ -105,8 +105,8 @@ object Compressor {
 
         //Handle new bitrate value
         val newBitrate: Int =
-            if (configuration.videoBitrateInMbps == null) getBitrate(bitrate, configuration.quality)
-            else configuration.videoBitrateInMbps!! * 1000000
+            if (configuration.videoBitrateInbps == null) getBitrate(bitrate, configuration.quality)
+            else configuration.videoBitrateInbps!!
 
         //Handle new width and height values
         var (newWidth, newHeight) = if (configuration.videoHeight != null) Pair(

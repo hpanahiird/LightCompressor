@@ -52,7 +52,7 @@ object VideoCompressor : CoroutineScope by MainScope() {
      * This defaults to [VideoQuality.MEDIUM]
      * [Configuration.isMinBitrateCheckEnabled] to determine if the checking for a minimum bitrate threshold
      * before compression is enabled or not. This default to `true`
-     * [Configuration.videoBitrateInMbps] which is a custom bitrate for the video. You might consider setting
+     * [Configuration.videoBitrateInbps] which is a custom bitrate for the video. You might consider setting
      * [Configuration.isMinBitrateCheckEnabled] to `false` if your bitrate is less than 2000000.
      *  * [Configuration.keepOriginalResolution] to keep the original video height and width when compressing.
      * This defaults to `false`
